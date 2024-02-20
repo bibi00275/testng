@@ -1,0 +1,61 @@
+What is TestNG? How does it differ from JUnit?
+
+TestNG is a Java-based testing framework inspired by JUnit and NUnit.
+Key Differences:
+Annotations: More extensive set, like @BeforeClass, @DataProvider
+Grouping & Prioritization: Test grouping is easier, fine-grained control over test order execution.
+Parallel Testing: Robust support for parallel test execution (threads, processes).
+Flexible Reporting: Built-in customizable reports
+Explain the commonly used TestNG annotations.
+
+Test Creation: @Test
+Setup/Teardown: @BeforeTest, @AfterTest, @BeforeMethod, @AfterMethod (also variants for Suites and Classes)
+Parameters: @Parameters
+Data: @DataProvider
+Control: enabled, dependsOnMethods, groups
+Describe how to achieve parallel testing with TestNG.
+
+XML Configuration (testng.xml):
+Set parallel attribute to 'tests', 'classes', or 'methods' on <suite> or <test> tags.
+For thread safety, use data providers and/or separate object instances for parallel tests.
+Programmatically: Use TestNG class methods and IInvokedMethodListener on your test classes.
+How do you pass parameters to tests in TestNG?
+
+testng.xml:
+<parameter> tag within <suite> or <test>
+Access in tests: @Parameters("parameterName")
+DataProvider: Return an Object[][] where values get passed to test methods.
+What is a DataProvider in TestNG? How is it used for data-driven testing?
+
+A @DataProvider annotated method returns an array of objects (Object[][] or Iterator<Object[]>)
+Test methods receive each object array as their method arguments.
+Enables running the same test with different input sets for comprehensive coverage.
+Testing Strategy
+
+Explain test grouping in TestNG and its benefits.
+
+Use the groups attribute on @Test annotations to categorize tests (e.g., "smoke", "regression")
+Benefits:
+Selective Execution: Run specific groups via XML or command line
+Organization: Structure large test suites logically.
+Discuss dependency management in TestNG (dependsOnMethods, dependsOnGroups)
+
+dependsOnMethods: A test method runs only if the methods it depends on have passed.
+dependsOnGroups: A test runs only if all tests in the depended-upon groups have passed.
+Use carefully as excessive dependencies can hinder test independence.
+How do you implement priority execution for tests in TestNG?
+
+priority attribute on the @Test annotation.
+Lower numbers = higher priority (Default priority=0)
+Be mindful that priority can limit test independence.
+What are the different types of reports that TestNG can generate?
+
+Default HTML Report.
+Customizable via listeners (implementing ITestListener interface)
+Integration with reporting tools like Extent Reports or ReportNG.
+Why might you choose TestNG over JUnit?  (Situational)**
+
+Focus on more complex, large-scale test suites requiring advanced grouping/prioritization
+Need for sophisticated parallel testing capabilities
+Desire for data-driven testing with greater flexibility in parameter passing.
+=============================
